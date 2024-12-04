@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mess Complaint App</title>
+</head>
+<body>
+    <h1>Complaints</h1>
+    <ul>
+        {% for complaint in complaints %}
+            <li>{{ complaint.to_dict().complaint_text }} - Status: {{ complaint.to_dict().status }}</li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('submit_complaint') }}">Submit a new complaint</a>
+</body>
+</html>
+
