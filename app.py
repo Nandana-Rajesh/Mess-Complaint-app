@@ -7,17 +7,18 @@ from google.cloud import storage as google_storage
 # Initialize Firebase Admin SDK with credentials from Streamlit secrets
 try:
     cred = credentials.Certificate({
-        "type": st.secrets["firebase_adminsdk"]["type"],
-        "project_id": st.secrets["firebase_adminsdk"]["project_id"],
-        "private_key_id": st.secrets["firebase_adminsdk"]["private_key_id"],
-        "private_key": st.secrets["firebase_adminsdk"]["private_key"].replace('\\n', '\n'),
-        "client_email": st.secrets["firebase_adminsdk"]["client_email"],
-        "client_id": st.secrets["firebase_adminsdk"]["client_id"],
-        "auth_uri": st.secrets["firebase_adminsdk"]["auth_uri"],
-        "token_uri": st.secrets["firebase_adminsdk"]["token_uri"],
-        "auth_provider_x509_cert_url": st.secrets["firebase_adminsdk"]["auth_provider_x509_cert_url"],
-        "client_x509_cert_url": st.secrets["firebase_adminsdk"]["client_x509_cert_url"]
+    "type": st.secrets["firebase_adminsdk"]["type"],
+    "project_id": st.secrets["firebase_adminsdk"]["project_id"],
+    "private_key_id": st.secrets["firebase_adminsdk"]["private_key_id"],
+    "private_key": st.secrets["firebase_adminsdk"]["private_key"].replace('\\n', '\n'),
+    "client_email": st.secrets["firebase_adminsdk"]["client_email"],
+    "client_id": st.secrets["firebase_adminsdk"]["client_id"],
+    "auth_uri": st.secrets["firebase_adminsdk"]["auth_uri"],
+    "token_uri": st.secrets["firebase_adminsdk"]["token_uri"],
+    "auth_provider_x509_cert_url": st.secrets["firebase_adminsdk"]["auth_provider_x509_cert_url"],
+    "client_x509_cert_url": st.secrets["firebase_adminsdk"]["client_x509_cert_url"]
     })
+
     firebase_admin.initialize_app(cred, {
         'storageBucket': 'mess-complaint-app.appspot.com'
     })
