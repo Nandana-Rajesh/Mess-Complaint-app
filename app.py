@@ -7,7 +7,7 @@ from google.cloud import storage as google_storage
 # Initialize Firebase Admin SDK
 cred = credentials.Certificate("firebase-adminsdk.json")
 firebase_admin.initialize_app(cred, {
-    'storageBucket': 'your-project-id.appspot.com'  # Replace with your Firebase storage bucket name
+    'storageBucket': 'mess-complaint-app.appspot.com' 
 })
 
 # Initialize Firestore
