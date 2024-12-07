@@ -2,20 +2,30 @@ import streamlit as st
 import firebase_admin
 from firebase_admin import credentials, firestore, storage
 import os
-import json
+from google.cloud import storage as google_storage
 
-# Access Firebase credentials from Streamlit Secrets
-cred_json = st.secrets["firebase_adminsdk"]
-cred = credentials.Certificate(json.loads(cred_json))
+# Initialize Firebase Admin SDK with credentials from Streamlit secrets
+cred = credentials.Certificate({
+    "type": st.secrets["firebase_adminsdk"]["type"],
+    "project_id": st.secrets["firebase_adminsdk"]["project_id"],
+    "private_key_id": st.secrets["firebase_adminsdk"]["private_key_id"],
+    "private_key": st.secrets["firebase_adminsdk"]["private_key"].replace('\\n', '\n'),
+    "client_email": st.secrets["firebase_adminsdk"]["client_email"],
+    "client_id": st.secrets["firebase_adminsdk"]["client_id"],
+    "auth_uri": st.secrets["firebase_adminsdk"]["auth_uri"],
+    "token_uri": st.secrets["firebase_adminsdk"]["token_uri"],
+    "auth_provider_x509_cert_url": st.secrets["firebase_adminsdk"]["auth_provider_x509_cert_url"],
+    "client_x509_cert_url": st.secrets["firebase_adminsdk"]["client_x509_cert_url"]
+})
 firebase_admin.initialize_app(cred, {
     'storageBucket': 'mess-complaint-app.appspot.com'
 })
 
-# Initialize Firestore
+# Initialize Firestore and Firebase Storage
 db = firestore.client()
 bucket = storage.bucket()
 
-# Streamlit App
+# Streamlit App for Uploading Complaints
 def upload_complaint():
     # Display the form to input complaint and upload an image
     st.title("Submit Your Complaint")
@@ -75,6 +85,7 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
 
