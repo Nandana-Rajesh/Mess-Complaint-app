@@ -2,12 +2,13 @@ import streamlit as st
 import firebase_admin
 from firebase_admin import credentials, firestore, storage
 import os
-from google.cloud import storage as google_storage
+import json
 
-# Initialize Firebase Admin SDK
-cred = credentials.Certificate("firebase-adminsdk.json")
+# Access Firebase credentials from Streamlit Secrets
+cred_json = st.secrets["firebase_adminsdk"]
+cred = credentials.Certificate(json.loads(cred_json))
 firebase_admin.initialize_app(cred, {
-    'storageBucket': 'mess-complaint-app.appspot.com' 
+    'storageBucket': 'mess-complaint-app.appspot.com'
 })
 
 # Initialize Firestore
@@ -74,5 +75,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
 
